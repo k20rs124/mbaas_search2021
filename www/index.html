@@ -17,10 +17,11 @@
 
     function fetchAll() {
       let TestDataClass = ncmb.DataStore(db);
-      TestDataClass.fetchAll()
-        .then(function(results) {
+      TestDataClass.order("name",false).fetchAll()
+        .then(function(results){
           showResults(results);
         })
+       
     }
 
     function showResults(results) {
