@@ -33,46 +33,38 @@
        
     }
 
-    function searchLevel() {
-      let level = parseInt($("#level").val());
+    function searchCost() {
+      let cost = parseInt($("#cost").val());
       let TestDataClass = ncmb.DataStore(db);
-      TestDataClass.equalTo("level",level).fetchAll()
+      TestDataClass.equalTo("cost",cost).fetchAll()
         .then(function(results){
           showResults(results);
         })
        
     }
 
-    function searchLevelLT() {
-      let level = parseInt($("#level").val());
+     function searchCategory() {
+      let category = $("#category").val();
       let TestDataClass = ncmb.DataStore(db);
-      TestDataClass.lessThan("level",level).fetchAll()
+      TestDataClass.equalTo("category",category).fetchAll()
         .then(function(results){
           showResults(results);
         })
        
     }
 
-    function searchLevelGT() {
-      let level = parseInt($("#level").val(),10);
-      let TestDataClass = ncmb.DataStore(db);
-      TestDataClass.greaterThan("level",level).fetchAll()
-        .then(function(results){
-          showResults(results);
-        })
-       
-    }
+
+    
 
     function showResults(results) {
       // テーブルのヘッダを生成
-      let msg = "<table><tr><th>name</th><th>Lvl</th><th>attack</th><th>defence</th></tr>";
+      let msg = "<table><tr><th>name</th><th>cost</th><th>category</th></tr>";
       for (let i = 0; i < results.length; i++) {
         // 各データを収めた表の列を生成
         msg += "<tr>";
         msg += "<td>" + results[i].name + "</td>";
-        msg += "<td class='num'>" + results[i].level + "</td>";
-        msg += "<td class='num'>" + results[i].attack + "</td>";
-        msg += "<td class='num'>" + results[i].defence + "</td>";
+        msg += "<td class='num'>" + results[i].cost + "</td>";
+        msg += "<td class='num'>" + results[i].category + "</td>";
         msg += "</tr>";
       }
       // テーブルのテイラを生成
@@ -83,22 +75,26 @@
 </head>
 
 <body>
-  <h1>mBaaS search</h1>
+  <h1>mobilesuit search</h1>
   <div>
     <label for="name">name:</label>
-    <input id="name" type="text" placeholder="monster name">
+    <input id="name" type="text" placeholder="mobilesuit name">
   </div>
   <div>
-    <label for="level">level:</label>
-    <input id="level" type="number" placeholder="monster level">
+    <label for="cost">cost:</label>
+    <input id="cost" type="number" placeholder="mobilesuit cost">
+  </div>
+  <div>
+    <label for="category">category:</label>
+    <input id="category" type="text" placeholder="mobilesuit category">
   </div>
   <div id="button">
     <button class="btn" onclick="fetchAll()">Fetch All</button>
     <button class="btn" onclick="searchName()">Name</button>
     <br>
-    <button class="btn" onclick="searchLevelLT()">Level &lt</button>
-    <button class="btn" onclick="searchLevel()">Level</button>
-    <button class="btn" onclick="searchLevelGT()">Level &gt;</button>
+    <button class="btn" onclick="searchCategory()">Category</button>
+    <button class="btn" onclick="searchCost()">Cost</button>
+   
   </div>
   <div id="message">message area</div>
 </body>
